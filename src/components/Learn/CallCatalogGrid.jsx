@@ -19,8 +19,6 @@ const CallCatalogGrid = () => {
   const [playS05] = useSound(SO5)
   const [playS06] = useSound(SO6)
 
-  const playArray = [playS01, playS02, playS03, playS04, playS05, playS06]
-
   return (
     <div>
       <Box
@@ -38,19 +36,12 @@ const CallCatalogGrid = () => {
           spacing={{ xs: 2, md: 12 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {playArray.map((play, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
-              <Image
-                src={OrcaSound}
-                alt={`Orca Call ${index}`}
-                style={{ width: '100%' }}
-              />
-
-              <IconButton onClick={play}>
-                <PlayCircleIcon fontSize="large" />
-              </IconButton>
-            </Grid>
-          ))}
+          <CallCatalogItem id={'S01'} play={playS01} />
+          <CallCatalogItem id={'S02'} play={playS02} />
+          <CallCatalogItem id={'S03'} play={playS03} />
+          <CallCatalogItem id={'S04'} play={playS04} />
+          <CallCatalogItem id={'S05'} play={playS05} />
+          <CallCatalogItem id={'S06'} play={playS06} />
         </Grid>
 
         <Button
@@ -66,6 +57,22 @@ const CallCatalogGrid = () => {
         </Button>
       </Box>
     </div>
+  )
+}
+
+const CallCatalogItem = (id, play) => {
+  return (
+    <Grid item xs={2} sm={4} md={4}>
+      <Image
+        src={OrcaSound}
+        alt={`Orca Call ${id}`}
+        style={{ width: '100%' }}
+      />
+
+      <IconButton onClick={play}>
+        <PlayCircleIcon fontSize="large" />
+      </IconButton>
+    </Grid>
   )
 }
 
