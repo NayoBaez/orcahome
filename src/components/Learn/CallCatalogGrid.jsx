@@ -12,7 +12,12 @@ import SO6 from '../../../public/audio/FO-S06.mp3'
 import OrcaSound from '../../../public/images/learn/orcasound.png'
 
 const CallCatalogGrid = () => {
-  const [play] = useSound([SO1, SO2, SO3, SO4, SO5, SO6])
+  const [playS01] = useSound(SO1)
+  const [playS02] = useSound(SO2)
+  const [playS03] = useSound(SO3)
+  const [playS04] = useSound(SO4)
+  const [playS05] = useSound(SO5)
+  const [playS06] = useSound(SO6)
 
   return (
     <div>
@@ -31,19 +36,12 @@ const CallCatalogGrid = () => {
           spacing={{ xs: 2, md: 12 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {Array.from(Array(6)).map((_, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
-              <Image
-                src={OrcaSound}
-                alt={`Orca Call ${index}`}
-                style={{ width: '100%' }}
-              />
-
-              <IconButton onClick={play}>
-                <PlayCircleIcon fontSize="large" />
-              </IconButton>
-            </Grid>
-          ))}
+          <CallCatalogItem id={'S01'} play={playS01} />
+          <CallCatalogItem id={'S02'} play={playS02} />
+          <CallCatalogItem id={'S03'} play={playS03} />
+          <CallCatalogItem id={'S04'} play={playS04} />
+          <CallCatalogItem id={'S05'} play={playS05} />
+          <CallCatalogItem id={'S06'} play={playS06} />
         </Grid>
 
         <Button
@@ -59,6 +57,22 @@ const CallCatalogGrid = () => {
         </Button>
       </Box>
     </div>
+  )
+}
+
+const CallCatalogItem = (id, play) => {
+  return (
+    <Grid item xs={2} sm={4} md={4}>
+      <Image
+        src={OrcaSound}
+        alt={`Orca Call ${id}`}
+        style={{ width: '100%' }}
+      />
+
+      <IconButton onClick={play}>
+        <PlayCircleIcon fontSize="large" />
+      </IconButton>
+    </Grid>
   )
 }
 
