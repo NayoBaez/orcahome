@@ -40,7 +40,16 @@ const CallCatalogGrid = () => {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {playArray.map((play, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
+            <Grid
+              item
+              xs={2}
+              sm={4}
+              md={4}
+              key={index}
+              sx={{
+                position: 'relative',
+              }}
+            >
               <Image
                 src={OrcaSound}
                 alt={`Orca Call ${index}`}
@@ -51,23 +60,14 @@ const CallCatalogGrid = () => {
                 onClick={play}
                 sx={{
                   position: 'absolute',
+                  right: 90,
+                  bottom: 50,
+                  color: '#C4C4C4',
                 }}
               >
                 <PlayCircleIcon
                   sx={{
-                    fontSize: 75,
-                  }}
-                />
-              </IconButton>
-              <IconButton
-                onClick={play}
-                sx={{
-                  position: 'absolute',
-                }}
-              >
-                <PauseCircleIcon
-                  sx={{
-                    fontSize: 75,
+                    fontSize: 95,
                   }}
                 />
               </IconButton>
