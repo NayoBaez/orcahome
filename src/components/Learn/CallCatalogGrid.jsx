@@ -1,3 +1,4 @@
+import PauseCircleIcon from '@mui/icons-material/PauseCircle'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'
 import { Box, Button, Grid, IconButton } from '@mui/material'
 import Image from 'next/image'
@@ -46,8 +47,29 @@ const CallCatalogGrid = () => {
                 style={{ width: '100%' }}
               />
 
-              <IconButton onClick={play}>
-                <PlayCircleIcon fontSize="large" />
+              <IconButton
+                onClick={play}
+                sx={{
+                  position: 'absolute',
+                }}
+              >
+                <PlayCircleIcon
+                  sx={{
+                    fontSize: 75,
+                  }}
+                />
+              </IconButton>
+              <IconButton
+                onClick={play}
+                sx={{
+                  position: 'absolute',
+                }}
+              >
+                <PauseCircleIcon
+                  sx={{
+                    fontSize: 75,
+                  }}
+                />
               </IconButton>
             </Grid>
           ))}
