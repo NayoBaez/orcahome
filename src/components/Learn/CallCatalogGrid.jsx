@@ -68,46 +68,44 @@ const CallCatalogGrid = () => {
                 position: 'relative',
               }}
             >
-              <div style={{ position: 'relative' }}>
-                <Image
-                  src={OrcaSound}
-                  alt={`Orca Call ${index}`}
-                  style={{ width: '100%' }}
-                />
-                {isPlaying[index] ? (
-                  <IconButton
-                    onClick={() => stopSound(index)}
+              <Image
+                src={OrcaSound}
+                alt={`Orca Call ${index}`}
+                style={{ width: '100%' }}
+              />
+              {isPlaying[index] ? (
+                <IconButton
+                  onClick={() => stopSound(index)}
+                  sx={{
+                    position: 'absolute',
+                    right: 85,
+                    bottom: 40,
+                    color: '#c4c4c4',
+                  }}
+                >
+                  <PauseCircleIcon
                     sx={{
-                      position: 'absolute',
-                      right: 95,
-                      bottom: 55,
-                      color: '#c4c4c4',
+                      fontSize: 100,
                     }}
-                  >
-                    <PauseCircleIcon
-                      sx={{
-                        fontSize: 75,
-                      }}
-                    />
-                  </IconButton>
-                ) : (
-                  <IconButton
-                    onClick={() => playSound(index)}
+                  />
+                </IconButton>
+              ) : (
+                <IconButton
+                  onClick={() => playSound(index)}
+                  sx={{
+                    position: 'absolute',
+                    right: 85,
+                    bottom: 40,
+                    color: '#c4c4c4',
+                  }}
+                >
+                  <PlayCircleIcon
                     sx={{
-                      position: 'absolute',
-                      right: 95,
-                      bottom: 55,
-                      color: '#c4c4c4',
+                      fontSize: 100,
                     }}
-                  >
-                    <PlayCircleIcon
-                      sx={{
-                        fontSize: 75,
-                      }}
-                    />
-                  </IconButton>
-                )}
-              </div>
+                  />
+                </IconButton>
+              )}
             </Grid>
           ))}
         </Grid>
