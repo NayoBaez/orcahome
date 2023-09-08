@@ -2,7 +2,7 @@ import PauseCircleIcon from '@mui/icons-material/PauseCircle'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'
 import { Box, Button, Grid, IconButton } from '@mui/material'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import useSound from 'use-sound'
 
 import SO1 from '../../../public/audio/FO-S01.mp3'
@@ -26,6 +26,20 @@ const CallCatalogGrid = () => {
   const playArray = [playS01, playS02, playS03, playS04, playS05, playS06]
   const stopArray = [stopS01, stopS02, stopS03, stopS04, stopS05, stopS06]
 
+  function playSound(index) {
+    const updatedIsPlaying = [...isPlaying]
+    updatedIsPlaying[index] = true
+    setIsPlaying(updatedIsPlaying)
+    playArray[index]()
+  }
+
+  function stopSound(index) {
+    const updatedIsPlaying = [...isPlaying]
+    updatedIsPlaying[index] = false
+    setIsPlaying(updatedIsPlaying)
+    stopArray[index]()
+  }
+
   return (
     <div>
       <Box
@@ -43,65 +57,26 @@ const CallCatalogGrid = () => {
           spacing={{ xs: 2, md: 12 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {isPlaying
-            ? playArray.map((play, index) => (
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  key={index}
-                  sx={{
-                    position: 'relative',
-                  }}
-                >
-                  <Image
-                    src={OrcaSound}
-                    alt={`Orca Call ${index}`}
-                    style={{ width: '100%' }}
-                  />
-
+          {playArray.map((play, index) => (
+            <Grid
+              item
+              xs={2}
+              sm={4}
+              md={4}
+              key={index}
+              sx={{
+                position: 'relative',
+              }}
+            >
+              <div style={{ position: 'relative' }}>
+                <Image
+                  src={OrcaSound}
+                  alt={`Orca Call ${index}`}
+                  style={{ width: '100%' }}
+                />
+                {isPlaying[index] ? (
                   <IconButton
-                    onClick={() => {
-                      setIsPlaying(false)
-                      play()
-                    }}
-                    sx={{
-                      position: 'absolute',
-                      right: 95,
-                      bottom: 55,
-                      color: '#c4c4c4',
-                    }}
-                  >
-                    <PlayCircleIcon
-                      sx={{
-                        fontSize: 75,
-                      }}
-                    />
-                  </IconButton>
-                </Grid>
-              ))
-            : stopArray.map((stop, index) => (
-                <Grid
-                  item
-                  xs={2}
-                  sm={4}
-                  md={4}
-                  key={index}
-                  sx={{
-                    position: 'relative',
-                  }}
-                >
-                  <Image
-                    src={OrcaSound}
-                    alt={`Orca Call ${index}`}
-                    style={{ width: '100%' }}
-                  />
-                  <IconButton
-                    onClick={() => {
-                      setIsPlaying(true)
-                      stop()
-                    }}
+                    onClick={() => stopSound(index)}
                     sx={{
                       position: 'absolute',
                       right: 95,
@@ -115,8 +90,26 @@ const CallCatalogGrid = () => {
                       }}
                     />
                   </IconButton>
-                </Grid>
-              ))}
+                ) : (
+                  <IconButton
+                    onClick={() => playSound(index)}
+                    sx={{
+                      position: 'absolute',
+                      right: 95,
+                      bottom: 55,
+                      color: '#c4c4c4',
+                    }}
+                  >
+                    <PlayCircleIcon
+                      sx={{
+                        fontSize: 75,
+                      }}
+                    />
+                  </IconButton>
+                )}
+              </div>
+            </Grid>
+          ))}
         </Grid>
         <Button
           variant="contained"
